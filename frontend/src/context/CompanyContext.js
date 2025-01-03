@@ -25,25 +25,18 @@ export const CompanyProvider = ({ children }) => {
       localStorage.setItem("companies", JSON.stringify(response.data)); // Save to localStorage
     } catch (error) {
       if (error.response) {
-        // Server responded with a status code out of range 2xx
-        console.error("Error response:", error.response);
         setError(`Error: ${error.response.status} - ${error.response.data}`);
       } else if (error.request) {
-        // Request was made but no response was received
-        console.error("Error request:", error.request);
         setError("Network error: No response from the server.");
       } else {
-        // Other errors
-        console.error("Axios error:", error.message);
         setError(`Axios error: ${error.message}`);
       }
     } finally {
       setLoading(false);
     }
   };
-  
+
   useEffect(() => {
-    // Only fetch companies if they're not already available in localStorage
     if (companies.length === 0) {
       fetchCompanies();
     }
@@ -59,7 +52,6 @@ export const CompanyProvider = ({ children }) => {
         return updatedCompanies;
       });
     } catch (error) {
-      console.error("Error adding company:", error);
       setError("Failed to add company. Please try again.");
     }
   };
@@ -78,7 +70,7 @@ export const CompanyProvider = ({ children }) => {
     setCompanies(updatedCompanies);
     localStorage.setItem("companies", JSON.stringify(updatedCompanies)); // Save updated companies
   };
-  
+
   const addCommunication = (companyId, communication) => {
     setCompanies((prevCompanies) => {
       const updatedCompanies = prevCompanies.map((company) =>
@@ -95,7 +87,7 @@ export const CompanyProvider = ({ children }) => {
       return updatedCompanies;
     });
   };
-  
+
   const updateCompanyCommunication = (updatedCompanies) => {
     setCompanies(updatedCompanies);
     localStorage.setItem("companies", JSON.stringify(updatedCompanies)); // Persist the updated companies
@@ -111,7 +103,6 @@ export const CompanyProvider = ({ children }) => {
         return updatedCompanies;
       });
     } catch (error) {
-      console.error("Error deleting company:", error);
       setError("Failed to delete company. Please try again.");
     }
   };

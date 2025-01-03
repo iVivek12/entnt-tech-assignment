@@ -1,194 +1,239 @@
-/* Admin Dashboard Styles */
-.admin-dashboard {
-  font-family: Arial, sans-serif;
-  background-color: #08082e;
-  padding: 20px;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+/* Admin Dashboard Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
 }
 
-/* Header Section */
+body {
+  background-color: #f4f6f9;
+  color: #333;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.admin-dashboard {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Header Styles */
 .admin-header {
+  background-color: #283593;
+  color: #fff;
+  padding: 20px;
   text-align: center;
-  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .admin-header h1 {
-  font-size: 36px;
-  color: #333;
-  margin: 0;
-}
-
-.admin-header p {
-  font-size: 18px;
-  color: #666;
-  margin: 5px 0;
-}
-
-/* Main Content Layout */
-.admin-content {
-  display: flex;
-  flex: 1;
-  gap: 20px;
-}
-
-/* Sidebar Navigation */
-.admin-sidebar {
-  width: 220px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding: 15px;
-}
-
-.admin-sidebar ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.admin-sidebar ul li {
+  font-size: 2.5rem;
   margin-bottom: 10px;
 }
 
-.admin-sidebar button {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  font-weight: bold;
-  color: #007bff;
-  background: none;
-  border: 2px solid transparent;
-  border-radius: 4px;
-  text-align: left;
-  cursor: pointer;
-  transition: all 0.3s;
+.admin-header p {
+  font-size: 1.2rem;
 }
 
-.admin-sidebar button:hover {
-  background-color: #f0f0f0;
-  border: 2px solid #007bff;
-}
-
-.admin-sidebar button:focus {
-  outline: none;
-  background-color: #eaf4ff;
-}
-
-/* Dynamic Content Target Div */
-.admin-target-content {
-  flex: 1;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
-  color:black;
-}
-
-.admin-target-content h2 {
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 15px;
-}
-
-.admin-target-content p {
-  font-size: 16px;
-  color: #555;
-  line-height: 1.5;
-}
-
-/* Button Styles */
-button {
-  font-size: 16px;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:hover {
-  opacity: 0.9;
-}
-
+/* Logout Button */
 .logout-btn {
-  margin-top: 10px;
-  background-color: #e74c3c;
+  background-color: #f44336;
   color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+  margin-top: 10px;
 }
 
 .logout-btn:hover {
-  background-color: #c0392b;
+  background-color: #d32f2f;
 }
 
-/* Communication and Company Item Styles */
+/* Navigation Styles */
+.admin-content {
+  display: flex;
+  flex: 1;
+  margin-top: 20px;
+}
+
+nav {
+  width: 250px;
+  background-color: #283593;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.admin-nav-list {
+  list-style: none;
+  padding: 0;
+}
+
+.admin-nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.2rem;
+  margin: 15px 0;
+  display: block;
+  padding: 12px 20px;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.admin-nav-link:hover {
+  background-color: #3f51b5;
+}
+
+/* Active Navigation */
+.admin-nav-link.active {
+  background-color: #1a237e;
+}
+
+/* Main Content Styles */
+.admin-companies,
+.admin-communications,
+.admin-log-communication {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+  margin-left: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 2rem;
+  color: #283593;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
 .company-list {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
 }
 
 .company-item {
-  background-color: #f9f9f9;
-  padding: 15px;
-  margin-bottom: 15px;
+  background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.company-item h3 {
-  font-size: 20px;
+.company-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+button {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #388e3c;
+}
+
+/* Communication Log Form */
+.admin-log-communication form {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: auto;
+}
+
+.admin-log-communication label {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: block;
   color: #333;
 }
 
-.company-item p {
-  color: #666;
-  margin: 5px 0;
-}
-
-/* Form Styles */
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-form input,
-form select,
-form textarea {
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
+.admin-log-communication input,
+.admin-log-communication select,
+.admin-log-communication textarea {
   width: 100%;
+  padding: 12px;
+  margin: 10px 0 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  background-color: #fafafa;
 }
 
-form textarea {
-  resize: vertical;
-  height: 100px;
+.admin-log-communication input:focus,
+.admin-log-communication select:focus,
+.admin-log-communication textarea:focus {
+  border-color: #283593;
+  outline: none;
 }
 
-form button {
-  background-color: #007bff;
-  color: #fff;
+.admin-log-communication button {
+  background-color: #3f51b5;
+  font-size: 1.2rem;
+  padding: 15px;
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-form button:hover {
-  background-color: #0056b3;
+.admin-log-communication button:hover {
+  background-color: #283593;
 }
 
-/* Media Queries */
+/* Responsive Design */
 @media (max-width: 768px) {
   .admin-content {
     flex-direction: column;
   }
 
-  .admin-sidebar {
+  nav {
     width: 100%;
-    margin-bottom: 20px;
+    padding: 10px;
   }
 
-  .admin-target-content {
-    flex: none;
+  .admin-companies,
+  .admin-communications,
+  .admin-log-communication {
+    padding: 15px;
+    margin-left: 0;
+  }
+
+  .company-item {
+    padding: 15px;
+  }
+
+  .admin-header h1 {
+    font-size: 2rem;
+  }
+
+  .admin-nav-link {
+    font-size: 1rem;
   }
 }

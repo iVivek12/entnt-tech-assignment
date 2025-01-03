@@ -17,6 +17,17 @@ const AdminDashboard = () => {
 
   const navigate = useNavigate(); // Hook to navigate programmatically
 
+  // Define the fetchCompanies function
+  const fetchCompanies = async () => {
+    try {
+      // Replace this with your actual API call to fetch companies
+      const data = await getCompanies();  // Assuming getCompanies is your API function
+      updateCompanyCommunication(data);  // Update the company context
+    } catch (err) {
+      console.error('Error fetching companies:', err);
+    }
+  };
+
   // Handle Communication Form Submit
   const handleCommunicationSubmit = (e) => {
     e.preventDefault();
@@ -67,15 +78,6 @@ const AdminDashboard = () => {
     localStorage.setItem('companies', JSON.stringify(updatedCompanies)); // Save updated companies to localStorage
   };
 
-  // Delete a company
-  const handleDeleteCompany = (companyId) => {
-    const updatedCompanies = companies.filter((company) => company._id !== companyId);
-
-    // Update the company context and localStorage
-    updateCompanyCommunication(updatedCompanies);
-    localStorage.setItem('companies', JSON.stringify(updatedCompanies)); // Save updated companies to localStorage
-  };
-
   // Handle Logout
   const handleLogout = () => {
     // Clear authentication data (e.g., token, user info)
@@ -83,17 +85,15 @@ const AdminDashboard = () => {
     // Do NOT remove communication data when logging out
     // localStorage.removeItem("newCommunication"); // This line should be commented out to keep data
     // Redirect to login page
-    navigate("/");
+    navigate("/"); 
   };
 
   // Effect to ensure the "Current Companies" section reflects the updated companies list
   useEffect(() => {
-    // Fetch saved companies from localStorage on every component render
-    const savedCompanies = JSON.parse(localStorage.getItem('companies'));
-    if (savedCompanies) {
-      updateCompanyCommunication(savedCompanies);  // Update context with saved data from localStorage
+    if (companies.length === 0) {
+      fetchCompanies(); // Fetch companies only once after the initial render
     }
-  }, [companies]);  // Add companies as a dependency to re-render when the company list changes
+  }, []); // Empty dependency array ensures it's only run once
 
   return (
     <div className="admin-dashboard">
@@ -183,7 +183,6 @@ const AdminDashboard = () => {
                         </li>
                       ))}
                     </ul>
-                    <button onClick={() => handleDeleteCompany(company._id)}>Delete Company</button>
                   </li>
                 ))}
               </ul>
@@ -201,7 +200,6 @@ const AdminDashboard = () => {
                 <select
                   value={newCommunication.companyId}
                   onChange={(e) => setNewCommunication({ ...newCommunication, companyId: e.target.value })}
-                  required
                 >
                   <option value="">Select Company</option>
                   {companies.map((company) => (
@@ -213,34 +211,25 @@ const AdminDashboard = () => {
               </div>
               <div>
                 <label>Communication Type</label>
-                <select
+                <input
+                  type="text"
                   value={newCommunication.type}
                   onChange={(e) => setNewCommunication({ ...newCommunication, type: e.target.value })}
-                  required
-                >
-                  <option value="">Select Communication Type</option>
-                  <option value="LinkedIn Post">LinkedIn Post</option>
-                  <option value="LinkedIn Message">LinkedIn Message</option>
-                  <option value="Email">Email</option>
-                  <option value="Phone Call">Phone Call</option>
-                  <option value="Other">Other</option>
-                </select>
+                />
               </div>
               <div>
-                <label>Date</label>
+                <label>Communication Date</label>
                 <input
                   type="date"
                   value={newCommunication.date}
                   onChange={(e) => setNewCommunication({ ...newCommunication, date: e.target.value })}
-                  required
                 />
               </div>
               <div>
-                <label>Description</label>
+                <label>Communication Description</label>
                 <textarea
                   value={newCommunication.description}
                   onChange={(e) => setNewCommunication({ ...newCommunication, description: e.target.value })}
-                  required
                 />
               </div>
               <button type="submit">Log Communication</button>

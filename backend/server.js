@@ -1,34 +1,28 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const dotenv = require("dotenv");
-const authRoutes = require("./routes/authRoutes"); // Import authentication routes
-const companyRoutes = require("./routes/companyRoutes"); // Import company routes
-
-dotenv.config(); // Load environment variables
+const express = require('express');
+const mongoose = require('mongoose');
+const companyRoutes = require('./routes/companyRoutes'); // Adjust path if needed
 
 const app = express();
 
 // Middleware
-app.use(express.json()); // For parsing application/json
-app.use(cors()); // Enable cross-origin requests
+app.use(express.json());
 
-// Use authentication and company routes
-authRoutes(app); // Authentication routes
-app.use("/api", companyRoutes); // Company routes
+// Connect to MongoDB (make sure your MongoDB connection string is correct)
+mongoose.connect('mongodb://localhost:27017/yourdb', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
-// Connect to MongoDB
-mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log("MongoDB connected...");
-  })
-  .catch((err) => console.log(err));
+// Use company routes
+app.use('/api', companyRoutes);
+
+// Handle 404 for undefined routes
+app.use((req, res) => {
+  res.status(404).send('API route not found');
+});
 
 // Start server
-app.listen(process.env.PORT || 5000, () => {
-  console.log(`Server is running on port ${process.env.PORT || 5000}`);
+const PORT = 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });

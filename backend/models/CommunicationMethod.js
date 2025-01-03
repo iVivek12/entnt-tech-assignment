@@ -1,4 +1,3 @@
-// models/CommunicationMethod.js
 const mongoose = require('mongoose');
 
 const communicationMethodSchema = new mongoose.Schema({

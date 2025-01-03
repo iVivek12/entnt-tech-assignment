@@ -1,4 +1,3 @@
-// components/Admin/CommunicationMethodManagement.js
 import './AdminDashboard.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -13,13 +12,14 @@ const CommunicationMethodManagement = () => {
   });
 
   useEffect(() => {
-    // Make sure you're pointing to the correct backend API
+    // Fetch communication methods from the backend
     axios.get('http://localhost:5000/api/communication-methods') // Ensure this URL is correct
       .then(response => {
         setMethods(response.data);
       })
       .catch(error => {
-        console.error('Error fetching communication methods:', error);
+        console.error('Error fetching communication methods:', error.response || error);
+        alert('Failed to fetch communication methods.');
       });
   }, []);
 
@@ -41,7 +41,8 @@ const CommunicationMethodManagement = () => {
         });
       })
       .catch(error => {
-        console.error('Error adding communication method:', error);
+        console.error('Error adding communication method:', error.response || error);
+        alert('Failed to add communication method.');
       });
   };
 
@@ -55,12 +56,14 @@ const CommunicationMethodManagement = () => {
           value={newMethod.name}
           onChange={handleChange}
           placeholder="Method Name"
+          required
         />
         <textarea
           name="description"
           value={newMethod.description}
           onChange={handleChange}
           placeholder="Description"
+          required
         />
         <input
           type="number"
@@ -68,6 +71,7 @@ const CommunicationMethodManagement = () => {
           value={newMethod.sequence}
           onChange={handleChange}
           placeholder="Sequence"
+          required
         />
         <label>
           Mandatory:
